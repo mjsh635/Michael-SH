@@ -66,11 +66,53 @@ def SwitchRequest(doors, revealedDoor, oldGuess)-> "players new guess":
     """
     show the doors, and montys opened door, ask if they want to switch, return new guess if they want to switch
     """
-    playerNewGuess = 1
+    print(f""" You have chosen {oldGuess}, Monty has revealed door {revealedDoor} is a Goat...""")
+    time.sleep(1.5)
+
+    while True: 
+
+            #take the user input
+            print("Would you like to swap doors? y/n")
+            playerSwapResponse = input('').lower()
+
+            #filter it to see if it is a digit, and falls in the doors bounds
+
+            if playerSwapResponse.isascii():
+                if playerSwapResponse == 'y' or playerSwapResponse == 'n':
+
+                    #if its a valid guess store the guess and set valid Entry = True
+                    if playerSwapResponse == 'y':
+                        playerWantsToSwap = True
+                    else:
+                        playerWantsToSwap = False
+                    break
+                else:
+                    print("""please enter y or n for your decision 
+                    """)
+                    
+            else:
+                print("""please enter y or n for your decision
+                """)
+            time.sleep(2)
+
+    if playerWantsToSwap:
+        for i in range(len(doors)):
+            if i == revealedDoor:
+                continue
+            elif i == oldGuess:
+                continue
+            else:
+                playerNewGuess = i
+    else:
+        playerNewGuess = oldGuess
+
     return playerNewGuess
 
 def Results(newGuess, doors) -> "string of results":
-    result = True
+    if doors[newGuess]:
+        result = "new Car!"
+    else:
+        result = "old Goat"
     return f"You got the: {result}"
 
 
@@ -86,3 +128,4 @@ def Play():
     newGuess = SwitchRequest(doors, revealed, guess)
     print(Results(newGuess,doors))
 
+Play()
