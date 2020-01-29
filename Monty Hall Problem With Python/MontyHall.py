@@ -132,3 +132,13 @@ def play():
     print(results(newGuess, doors))
 
 
+def simulate(cycles, door_size):
+    """When called will print out the results"""
+    pass
+
+
+def choice_of_operation():
+    """When called will prompt the user with play or simulate,
+    where they can pick whether to play or simulate, and how many
+    cycles"""
+    pass
