@@ -5,53 +5,53 @@ ToDo:
 
 Menu to ask to Play or Simulate
 """
-#import libraries that will be needed
+# import libraries that will be needed
 import random
 import time
 
 
-
-def StartRandomDoorPositions() -> 'array of doors':
+def StartRandomDoorPositions() -> list(bool):  # list of doors
     """
     When called will return bool[] with all set false except 1 randomly chosen door which will be set true
     """
 
-    randint = random.randint(0,2)
-    randomDoors = [False,False,False]
+    randint = random.randint(0, 2)
+    randomDoors = [False, False, False]
     randomDoors[randint] = True
     return randomDoors
 
-def PlayersGuess(doors) -> 'int of door guessed':
+
+def PlayersGuess(doors) -> int:  # player guess
     """
     When called will ask for the player to
     """
-    while True: 
+    while True:
 
-            #take the user input
-            print("Please pick a door....1 | 2 | 3")
-            potentialplayerGuess = input('')
+        # take the user input
+        print("Please pick a door....1 | 2 | 3")
+        potentialplayerGuess = input('')
 
-            #filter it to see if it is a digit, and falls in the doors bounds
+        # filter it to see if it is a digit, and falls in the doors bounds
 
-            if potentialplayerGuess.isdigit():
-                if int(potentialplayerGuess) >= 1 and int(potentialplayerGuess) <= 3:
+        if potentialplayerGuess.isdigit():
+            if int(potentialplayerGuess) >= 1 and int(potentialplayerGuess) <= 3:
 
-                    #if its a valid guess store the guess and set valid Entry = True
+                # if its a valid guess store the guess and set valid Entry = True
 
-                    playerGuess = int(potentialplayerGuess)
-                    break
-                else:
-                    print("""That is not a door, please enter 1, 2, or 3... 
-                    """)
-                    
+                playerGuess = int(potentialplayerGuess) - 1
+                break
             else:
-                print("""That was not a number, please enter a number...
-                """)
-            time.sleep(2)
-    return playerGuess        
-    
+                print("""That is not a door, please enter 1, 2, or 3... 
+                    """)
 
-def MontyReveals(doors,playerGuess) -> "Monty's opened door":
+        else:
+            print("""That was not a number, please enter a number...
+                """)
+        time.sleep(2)
+    return playerGuess
+
+
+def MontyReveals(doors, playerGuess) -> int:  # Monty's opened door
     """
     take doors in, and the door the player guess, reveals a false door that isnt the players guess
     """
@@ -62,38 +62,39 @@ def MontyReveals(doors,playerGuess) -> "Monty's opened door":
             return MontyRevealed
 
 
-def SwitchRequest(doors, revealedDoor, oldGuess)-> "players new guess":
+def SwitchRequest(doors, revealedDoor, oldGuess) -> int:  # players new guess
     """
     show the doors, and montys opened door, ask if they want to switch, return new guess if they want to switch
     """
-    print(f""" You have chosen {oldGuess}, Monty has revealed door {revealedDoor} is a Goat...""")
+    print(
+        f""" You have chosen door {oldGuess + 1}, Monty has revealed door {revealedDoor + 1} is a Goat...""")
     time.sleep(1.5)
 
-    while True: 
+    while True:
 
-            #take the user input
-            print("Would you like to swap doors? y/n")
-            playerSwapResponse = input('').lower()
+        # take the user input
+        print("Would you like to swap doors? y/n")
+        playerSwapResponse = input('').lower()
 
-            #filter it to see if it is a digit, and falls in the doors bounds
+        # filter it to see if it is a digit, and falls in the doors bounds
 
-            if playerSwapResponse.isascii():
-                if playerSwapResponse == 'y' or playerSwapResponse == 'n':
+        if playerSwapResponse.isascii():
+            if playerSwapResponse == 'y' or playerSwapResponse == 'n':
 
-                    #if its a valid guess store the guess and set valid Entry = True
-                    if playerSwapResponse == 'y':
-                        playerWantsToSwap = True
-                    else:
-                        playerWantsToSwap = False
-                    break
+                # if its a valid guess store the guess and set valid Entry = True
+                if playerSwapResponse == 'y':
+                    playerWantsToSwap = True
                 else:
-                    print("""please enter y or n for your decision 
-                    """)
-                    
+                    playerWantsToSwap = False
+                break
             else:
-                print("""please enter y or n for your decision
+                print("""please enter y or n for your decision 
+                    """)
+
+        else:
+            print("""please enter y or n for your decision
                 """)
-            time.sleep(2)
+        time.sleep(2)
 
     if playerWantsToSwap:
         for i in range(len(doors)):
@@ -108,15 +109,14 @@ def SwitchRequest(doors, revealedDoor, oldGuess)-> "players new guess":
 
     return playerNewGuess
 
-def Results(newGuess, doors) -> "string of results":
+
+def Results(newGuess, doors) -> str:  # message to print
     if doors[newGuess]:
         result = "new Car!"
     else:
         result = "old Goat"
     return f"You got the: {result}"
 
-
-    
 
 def Play():
     """
@@ -126,6 +126,7 @@ def Play():
     guess = PlayersGuess(doors)
     revealed = MontyReveals(doors, guess)
     newGuess = SwitchRequest(doors, revealed, guess)
-    print(Results(newGuess,doors))
+    print(Results(newGuess, doors))
+
 
 Play()
