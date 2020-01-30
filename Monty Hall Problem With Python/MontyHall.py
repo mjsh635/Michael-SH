@@ -141,4 +141,33 @@ def choice_of_operation():
     """When called will prompt the user with play or simulate,
     where they can pick whether to play or simulate, and how many
     cycles"""
-    pass
+    while True:
+
+        # take the user input
+        print("would you like to simulate or play? s/p")
+        player_operation_choice = input('').lower()
+
+        # filter it to see if it is a digit, and falls in the doors bounds
+
+        if player_operation_choice.isascii():
+            if (player_operation_choice == 's'
+                    or player_operation_choice == 'p'):
+
+                # if its a valid guess then
+                # store the guess and set valid Entry = True
+                if player_operation_choice == 's':
+                    pass
+                else:
+                    play()
+                break
+            else:
+                print("""please enter s or p for your decision
+                    """)
+
+        else:
+            print("""please enter s or p for your decision
+                """)
+        time.sleep(1.5)
+
+
+choice_of_operation()
