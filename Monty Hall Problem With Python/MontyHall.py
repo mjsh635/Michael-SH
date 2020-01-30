@@ -22,7 +22,7 @@ def start_random_door_positions() -> list:  # list of doors
     return list_of_doors
 
 
-def players_guess(doors) -> int:  # player guess
+def players_guess() -> int:  # player guess
     """When called will ask for the player to pick a door
     """
     while True:
@@ -126,7 +126,7 @@ def play():
     to see if you can out smart monty.
     """
     doors = start_random_door_positions()
-    guess = players_guess(doors)
+    guess = players_guess()
     revealed = monty_reveals_door(doors, guess)
     newGuess = switch_request(doors, revealed, guess)
     print(results(newGuess, doors))
