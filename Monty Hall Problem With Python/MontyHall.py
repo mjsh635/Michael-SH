@@ -34,8 +34,8 @@ def players_guess(doors) -> int:  # player guess
         # filter it to see if it is a digit, and falls in the doors bounds
 
         if potential_player_guess.isdigit():
-            if (int(potential_player_guess) >= 1 and
-                    int(potential_player_guess) <= 3):
+            if (int(potential_player_guess) >= 1
+                    and int(potential_player_guess) <= 3):
 
                 # if its a valid guess store the guess
                 # and set valid Entry = True
@@ -81,8 +81,8 @@ def switch_request(doors, revealed_door, old_guess) -> int:  # New guess
         # filter it to see if it is a digit, and falls in the doors bounds
 
         if player_swap_response.isascii():
-            if player_swap_response == 'y' or player_swap_response == 'n':
-
+            if (player_swap_response == 'y'
+                    or player_swap_response == 'n'):
                 # if its a valid guess then
                 # store the guess and set valid Entry = True
                 if player_swap_response == 'y':
