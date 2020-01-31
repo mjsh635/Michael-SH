@@ -23,7 +23,7 @@ namespace MontyHallProblem
             return arrayOfDoors;
         }
 
-        public int PlayerGuess()
+        private int PlayerGuess()
         {
             int potentialPlayerGuess;
             string playerInput;
@@ -49,11 +49,10 @@ namespace MontyHallProblem
                 {
                     Console.WriteLine("That was not a number, please enter a number...");
                 }
-                System.Threading.Thread.Sleep(1500);
             }
         }
 
-        public int MontyRevealedDoor(bool[] doors, int playerGuess)
+        private int MontyRevealedDoor(bool[] doors, int playerGuess)
         {
             int montyDoor = 0;
             for (int i = 0; i < doors.Length; i++)
