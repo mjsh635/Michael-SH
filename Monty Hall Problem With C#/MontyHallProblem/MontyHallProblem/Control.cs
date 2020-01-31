@@ -70,13 +70,73 @@ namespace MontyHallProblem
             return montyDoor;
         }
 
-        public int SwitchRequest(bool[] doors, int montysRevealedDoor, int oldGuess)
+        private int SwitchRequest(bool[] doors, int montysRevealedDoor, int oldGuess)
         {
-            int playerNewGuess = 0;
-            return playerNewGuess;
+
+            char parseResult;
+            string playerSwapResponse;
+            bool playerWantsToSwap;
+            int newGuess = 0;
+
+            Console.WriteLine(string.Format("you have chosen door {0}, Monty has revealed that door {1} is a  Goat", oldGuess + 1, montysRevealedDoor + 1));
+
+            while (true)
+            {
+                Console.WriteLine("Would you like to swap doors? y/n");
+                playerSwapResponse = Console.ReadLine().ToLower();
+
+                if (char.TryParse(playerSwapResponse, out parseResult))
+                {
+                    if (parseResult == 'y' || parseResult == 'n')
+                    {
+                        if (parseResult == 'y')
+                        {
+                            playerWantsToSwap = true;
+                        }
+                        else
+                        {
+                            playerWantsToSwap = false;
+                        }
+                        break;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter y or n for your decision");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter y or n for your decision");
+                }
+                
+            }
+            if (playerWantsToSwap)
+            {
+                for (int i = 0; i < doors.Length; i++)
+                {
+                    if (i == montysRevealedDoor)
+                    {
+                        continue;
+                    }
+                    else if (i == oldGuess)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        newGuess = i;
+                    }
+                }
+            }
+            else
+            {
+                newGuess = oldGuess;
+            }
+            return newGuess;
         }
 
-        public string ResultPrint(bool[] doors, int newGuess)
+        private string ResultPrint(bool[] doors, int newGuess)
         {
             string result = "";
             if (doors[newGuess])
