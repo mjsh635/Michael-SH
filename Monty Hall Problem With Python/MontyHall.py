@@ -113,7 +113,10 @@ def switch_request(doors, revealed_door, old_guess) -> int:  # New guess
     return player_new_guess
 
 
-def results(new_guess, doors) -> str:  # message to print
+def results_with_message(new_guess, doors) -> str:  # message to print
+    """Take the guess and doors and return a win or lose
+    message.
+    """
     if doors[new_guess]:
         result = "new Car!"
     else:
