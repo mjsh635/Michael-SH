@@ -132,18 +132,63 @@ def play():
     guess = players_guess()
     revealed = monty_reveals_door(doors, guess)
     newGuess = switch_request(doors, revealed, guess)
-    print(results(newGuess, doors))
+    print(results_with_message(newGuess, doors))
 
 
-def simulate(cycles, door_size):
-    """When called will print out the results"""
-    pass
+def results(new_guess, doors):
+    """Take the guess and doors and return whether true
+    or false.
+    """
+    return doors[new_guess]
+
+
+def simulate():
+    """When called will print out the results
+    """
+    switch_win_count = 0
+    noswitch_win_count = 0
+    requested_cycles = input('How many simulated cycles would you like?')
+    
+    for _ in range(int(requested_cycles)):
+        doors = start_random_door_positions()
+        guess = random.randint(0,2)
+ 
+        if (results(guess, doors)):
+            noswitch_win_count += 1
+
+    noswitch_win_percentage = 100 * (noswitch_win_count/int(requested_cycles))
+    print(f"After {requested_cycles}, by always staying you win:\
+ {noswitch_win_percentage:.3f} of the time")
+
+    for _ in range(int(requested_cycles)):
+        doors = start_random_door_positions()
+        guess = random.randint(0,2)
+        revealed = monty_reveals_door(doors, guess)
+        if True:
+                for i in range(len(doors)):
+                    if i == revealed:
+                        continue
+                    elif i == guess:
+                        continue
+                    else:
+                        new_guess = i
+        else:
+            new_guess = guess
+
+        if (results(new_guess, doors)):
+            switch_win_count += 1
+    
+    switch_win_percentage = 100 * (switch_win_count /int(requested_cycles))
+    print(f"After {requested_cycles}, by always switching you win:\
+ {switch_win_percentage:.3f} of the time")
+
 
 
 def choice_of_operation():
     """When called will prompt the user with play or simulate,
     where they can pick whether to play or simulate, and how many
-    cycles"""
+    cycles
+    """
     while True:
 
         # take the user input
@@ -159,7 +204,7 @@ def choice_of_operation():
                 # if its a valid guess then
                 # store the guess and set valid Entry = True
                 if player_operation_choice == 's':
-                    pass
+                    simulate()
                 else:
                     play()
                 break
