@@ -14,9 +14,13 @@ namespace MontyHallProblem
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            while (true)
+            {
+                Control game = new Control();
+
+                Console.WriteLine(game.Play());
+                
+            }
         }
     }
 }
