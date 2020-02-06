@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MontyHallProblem")]
+[assembly: AssemblyTitle("MontyHallProblemCSharp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MontyHallProblem")]
+[assembly: AssemblyProduct("MontyHallProblemCSharp")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("75beac0a-8de7-4f92-b078-c8671944e918")]
+[assembly: Guid("136d957f-f250-43b0-9167-62278380f699")]
 
 // Version information for an assembly consists of the following four values:
 //
