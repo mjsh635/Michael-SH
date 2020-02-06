@@ -139,22 +139,22 @@ def simulate():
     switch_win_count = 0
     noswitch_win_count = 0
     requested_cycles = input('How many simulated cycles would you like?')
-    
-    for _ in range(int(requested_cycles)):
-        doors = start_random_door_positions()
+    # run the simulation for target amount of cycles
+    for cycle in range(1, int(requested_cycles) + 1):
+        #create a setup and always stay
+        doors = _start_random_door_positions()
         guess = random.randint(0,2)
- 
-        if (results(guess, doors)):
+        if (_results(guess, doors)):
             noswitch_win_count += 1
-
-    noswitch_win_percentage = 100 * (noswitch_win_count/int(requested_cycles))
-    print(f"After {requested_cycles}, by always staying you win:\
+        noswitch_win_percentage = 100 * (noswitch_win_count/cycle)
+        # every 10th cycle print an update
+        if cycle % (int(requested_cycles)/10) == 0:
+            print(f"After {cycle}, by always staying you win: \
  {noswitch_win_percentage:.3f} of the time")
-
-    for _ in range(int(requested_cycles)):
-        doors = start_random_door_positions()
+        # create a setup and always switch
+        doors = _start_random_door_positions()
         guess = random.randint(0,2)
-        revealed = monty_reveals_door(doors, guess)
+        revealed = _monty_reveals_door(doors, guess)
         if True:
                 for i in range(len(doors)):
                     if i == revealed:
@@ -165,15 +165,13 @@ def simulate():
                         new_guess = i
         else:
             new_guess = guess
-
-        if (results(new_guess, doors)):
+        if (_results(new_guess, doors)):
             switch_win_count += 1
-    
-    switch_win_percentage = 100 * (switch_win_count /int(requested_cycles))
-    print(f"After {requested_cycles}, by always switching you win:\
+        switch_win_percentage = 100 * (switch_win_count /cycle )
+        # every 10th cycle print an update
+        if cycle % (int(requested_cycles)/10) == 0:
+            print(f"After {cycle}, by always switching you win:\
  {switch_win_percentage:.3f} of the time")
-
-
 
 def choice_of_operation():
     """When called will prompt the user with play or simulate,
