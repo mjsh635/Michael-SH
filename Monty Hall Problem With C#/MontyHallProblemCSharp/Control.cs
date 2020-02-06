@@ -149,15 +149,24 @@ class Control
         return string.Format("you got the {0}", result);
     }
 
-    public string Play()
+    public void Play()
     {
         var doors = StartRandomDoorPositions();
         var oldGuess = PlayerGuess();
         var montyDoors = MontyRevealedDoor(doors, oldGuess);
         var newGuess = SwitchRequest(doors, montyDoors, oldGuess);
         var result = ResultPrint(doors, newGuess);
-        return result;
+        Console.WriteLine(result);
     }
 
+    public void Simulate()
+    {
+
+    }
+    
+    public void ChooseMode()
+    {
+
+    }
 }
 

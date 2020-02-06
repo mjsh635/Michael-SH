@@ -10,7 +10,9 @@ namespace MontyHallProblemCSharp
     {
         static void Main(string[] args)
         {
-           
+            Control montyGame = new Control();
+            Console.WriteLine(montyGame.Play());
+            Console.Read();
         }
     }
 }
