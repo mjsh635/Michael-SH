@@ -157,16 +157,49 @@ class MontyGame
         var newGuess = SwitchRequest(doors, montyDoors, oldGuess);
         var result = ResultPrint(doors, newGuess);
         Console.WriteLine(result);
+        Console.Read();
     }
 
     public void Simulate()
     {
 
     }
-    
+
     public void ChooseMode()
     {
+        string playerModeResponse;
+        char parseResult;
 
+        while (true)
+        {
+            Console.WriteLine("Would you like play or simulate? p/s");
+            playerModeResponse = Console.ReadLine().ToLower();
+
+            if (char.TryParse(playerModeResponse, out parseResult))
+            {
+                if (parseResult == 's' || parseResult == 'p')
+                {
+                    if (parseResult == 'p')
+                    {
+                        Play();
+                    }
+                    else
+                    {
+                        Simulate();
+                    }
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("Would you like play or simulate? p/s");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Would you like play or simulate? p/s");
+            }
+        }
     }
 }
 
