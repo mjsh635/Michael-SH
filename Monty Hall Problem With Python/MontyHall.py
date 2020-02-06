@@ -5,13 +5,7 @@ To execute this code simply have Python 3 installed.
 import random
 import time
 
-"""
-Todo List:
-create a menu that lets you PLay or Simulate
-"""
-
-
-def start_random_door_positions() -> list:  # list of doors
+def _start_random_door_positions() -> list:  # list of doors
     """When called will return bool[] with all set false
      except 1 randomly chosen door which will be set true
     """
@@ -22,7 +16,7 @@ def start_random_door_positions() -> list:  # list of doors
     return list_of_doors
 
 
-def players_guess() -> int:  # player guess
+def _players_guess() -> int:  # player guess
     """When called will ask for the player to pick a door
     """
     while True:
@@ -53,7 +47,7 @@ def players_guess() -> int:  # player guess
     return player_guess
 
 
-def monty_reveals_door(doors, player_guess) -> int:  # Monty's opened door
+def _monty_reveals_door(doors, player_guess) -> int:  # Monty's opened door
     """take doors in, and the door the player guess, reveals a false door
     that isnt the players guess
     """
@@ -64,7 +58,7 @@ def monty_reveals_door(doors, player_guess) -> int:  # Monty's opened door
             return monty_revealed
 
 
-def switch_request(doors, revealed_door, old_guess) -> int:  # New guess
+def _switch_request(doors, revealed_door, old_guess) -> int:  # New guess
     """show the doors, and montys opened door, ask if they want to switch,
     return new guess if they want to switch
     """
@@ -113,7 +107,7 @@ def switch_request(doors, revealed_door, old_guess) -> int:  # New guess
     return player_new_guess
 
 
-def results_with_message(new_guess, doors) -> str:  # message to print
+def _results_with_message(new_guess, doors) -> str:  # message to print
     """Take the guess and doors and return a win or lose
     message.
     """
@@ -123,24 +117,21 @@ def results_with_message(new_guess, doors) -> str:  # message to print
         result = "old Goat"
     return f"You got the: {result}"
 
-
-def play():
-    """Starts a playable version of the game,
-    to see if you can out smart monty.
-    """
-    doors = start_random_door_positions()
-    guess = players_guess()
-    revealed = monty_reveals_door(doors, guess)
-    newGuess = switch_request(doors, revealed, guess)
-    print(results_with_message(newGuess, doors))
-
-
-def results(new_guess, doors):
+def _results(new_guess, doors):
     """Take the guess and doors and return whether true
     or false.
     """
     return doors[new_guess]
 
+def play():
+    """Starts a playable version of the game,
+    to see if you can out smart monty.
+    """
+    doors = _start_random_door_positions()
+    guess = _players_guess()
+    revealed = _monty_reveals_door(doors, guess)
+    newGuess = _switch_request(doors, revealed, guess)
+    print(_results_with_message(newGuess, doors))
 
 def simulate():
     """When called will print out the results
