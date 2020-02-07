@@ -149,8 +149,9 @@ def simulate():
         noswitch_win_percentage = 100 * (noswitch_win_count/cycle)
         # every 10th cycle print an update
         if cycle % (int(requested_cycles)/10) == 0:
-            print(f"After {cycle}, by always staying you win: \
- {noswitch_win_percentage:.3f} of the time")
+            print(f"After {cycle} cycles, by always staying you win: \
+ {noswitch_win_percentage:.3f} percent of the time")
+ 
         # create a setup and always switch
         doors = _start_random_door_positions()
         guess = random.randint(0,2)
@@ -163,15 +164,14 @@ def simulate():
                         continue
                     else:
                         new_guess = i
-        else:
-            new_guess = guess
+        
         if (_results(new_guess, doors)):
             switch_win_count += 1
         switch_win_percentage = 100 * (switch_win_count /cycle )
         # every 10th cycle print an update
         if cycle % (int(requested_cycles)/10) == 0:
-            print(f"After {cycle}, by always switching you win:\
- {switch_win_percentage:.3f} of the time")
+            print(f"After {cycle} cycles, by always switching you win:\
+ {switch_win_percentage:.3f} percent of the time")
 
 def choice_of_operation():
     """When called will prompt the user with play or simulate,
