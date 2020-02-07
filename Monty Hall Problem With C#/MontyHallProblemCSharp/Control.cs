@@ -40,16 +40,22 @@ class MontyGame
                 }
                 else
                 {
-                    Console.WriteLine("That is not a door, please enter 1, 2, or 3...");
+                    Console.WriteLine("That is not a door option");
                 }
             }
             else
             {
-                Console.WriteLine("That was not a number, please enter a number...");
+                Console.WriteLine("That was not a number");
             }
         }
     }
 
+    /// <summary>
+    /// Returns a door that monty reveals is false
+    /// </summary>
+    /// <param name="doors"> bool array of doors</param>
+    /// <param name="playerGuess"> int of player guess 0-2</param>
+    /// <returns></returns>
     private int MontyRevealedDoor(bool[] doors, int playerGuess)
     {
         int montyDoor = 0;
@@ -76,7 +82,7 @@ class MontyGame
         bool playerWantsToSwap;
         int newGuess = 0;
 
-        Console.WriteLine(string.Format("you have chosen door {0}, Monty has revealed that door {1} is a  Goat", oldGuess + 1, montysRevealedDoor + 1));
+        Console.WriteLine($"You have chosen door {oldGuess + 1}, Monty has revealed that door {montysRevealedDoor + 1} is a  Goat");
 
         while (true)
         {
@@ -100,7 +106,7 @@ class MontyGame
                 }
                 else
                 {
-                    Console.WriteLine("Please enter y or n for your decision");
+                    Console.WriteLine($"{parseResult} was not an option");
                 }
             }
             else
@@ -146,7 +152,7 @@ class MontyGame
             result = " Old Goat ";
         }
 
-        return string.Format("you got the {0}", result);
+        return ($"you got the {result}");
     }
     private bool Result(bool[] doors, int newGuess)
     {
@@ -172,6 +178,7 @@ class MontyGame
         int requestedCycles = 1000;
 
         for (int cycles = 1; cycles < requestedCycles + 1; cycles++)
+        Console.WriteLine("How many simulations?");
         {
             var doorsNoSwitch = StartRandomDoorPositions();
             var guessNoSwitch = random.Next(0,3);
@@ -186,7 +193,7 @@ class MontyGame
 
             if (cycles % (requestedCycles/10) == 0)
             {
-                Console.WriteLine(String.Format("After {0} cycles, by always staying you win: {1} percent of the time", cycles, noSwitchWinPercentage));
+                Console.WriteLine($"{requestedCyclesIntput} isn't a positive number");
             }
 
             var doorsSwitch = StartRandomDoorPositions();
@@ -221,7 +228,8 @@ class MontyGame
             switchWinPercentage = ((switchWinCount/cycles)*100);
             if (cycles % (requestedCycles / 10) == 0)
             {
-                Console.WriteLine(String.Format("After {0} cycles, by always switching you win: {1} percent of the time \n", cycles, switchWinPercentage));
+                Console.WriteLine($"After {cycles} cycles, by always staying you win: {noSwitchWinPercentage} percent of the time");
+                Console.WriteLine($"After {cycles} cycles, by always switching you win: {switchWinPercentage} percent of the time \n");
             }
             
         }
@@ -255,12 +263,12 @@ class MontyGame
                 }
                 else
                 {
-                    Console.WriteLine("Would you like play or simulate? p/s");
+                    Console.WriteLine($"{parseResult} is not an option, s/p");
                 }
             }
             else
             {
-                Console.WriteLine("Would you like play or simulate? p/s");
+                Console.WriteLine($"{ parseResult} is not an option, s / p");
             }
         }
     }
