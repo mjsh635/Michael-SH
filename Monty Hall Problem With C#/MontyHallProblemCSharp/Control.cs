@@ -166,8 +166,8 @@ class MontyGame
 
     public void Simulate()
     {
-        int switchWinCount = 0;
-        int noSwitchWinCount = 0;
+        float switchWinCount = 0;
+        float noSwitchWinCount = 0;
         string requestedCyclesIntput = "";
         int requestedCycles = 1000;
 
@@ -182,7 +182,7 @@ class MontyGame
                 noSwitchWinCount++;
             }
 
-            noSwitchWinPercentage = 100 * (noSwitchWinCount / cycles);
+            noSwitchWinPercentage = ((noSwitchWinCount / cycles) * 100);
 
             if (cycles % (requestedCycles/10) == 0)
             {
@@ -192,12 +192,12 @@ class MontyGame
             var doorsSwitch = StartRandomDoorPositions();
             var guessSwitch = random.Next(0, 3);
             var revealedDoor = MontyRevealedDoor(doorsSwitch, guessSwitch);
-            int newGuess;
+            int newGuess = 0;
             float switchWinPercentage;
 
             if (true)
             {
-                for (int i = 1; i < doorsSwitch.Length + 1; i++)
+                for (int i = 0; i < doorsSwitch.Length; i++)
                 {
                     if (i == revealedDoor)
                     {
@@ -214,14 +214,14 @@ class MontyGame
                 }
             }
 
-            if (Result(doorsSwitch,guessSwitch))
+            if (Result(doorsSwitch,newGuess))
             {
                 switchWinCount++;
             }
-            switchWinPercentage = 100 * (switchWinCount / cycles);
+            switchWinPercentage = ((switchWinCount/cycles)*100);
             if (cycles % (requestedCycles / 10) == 0)
             {
-                Console.WriteLine(String.Format("After {0} cycles, by always switching you win: {1} percent of the time", cycles, switchWinPercentage));
+                Console.WriteLine(String.Format("After {0} cycles, by always switching you win: {1} percent of the time \n", cycles, switchWinPercentage));
             }
             
         }
