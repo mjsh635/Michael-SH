@@ -6,14 +6,23 @@ using System.Threading.Tasks;
 
 class MontyGame
 {
-    Random random = new Random();
+    // Random is used for randomized int values
+    Random random;
+
+    /// <summary>
+    /// Constructor for MontyGame Class
+    /// </summary>
+    public MontyGame()
+    {
+        random = new Random();
+    }
 
     /// <summary>
     /// When called will return bool[] with all set false
     /// except 1 randomly chosen door which will be set true
     /// </summary>
     /// <returns> bool[] of doors</returns>
-    private bool[] StartRandomDoorPositions()
+    private bool[] RandomizeDoors()
     {
         int randomInt = random.Next(0, 2);
         bool[] arrayOfDoors = new bool[3] { false, false, false };
@@ -21,6 +30,10 @@ class MontyGame
         return arrayOfDoors;
     }
 
+    /// <summary>
+    /// Returns players door guess
+    /// </summary>
+    /// <returns></returns>
     private int PlayerGuess()
     {
         int potentialPlayerGuess;
@@ -74,6 +87,13 @@ class MontyGame
         return montyDoor;
     }
 
+    /// <summary>
+    /// returns new int if the player chooses to switch or original if not
+    /// </summary>
+    /// <param name="doors">bool array of doors</param>
+    /// <param name="montysRevealedDoor"> door revealed by monty to be false</param>
+    /// <param name="oldGuess">int of player guess 0-2</param>
+    /// <returns></returns>
     private int SwitchRequest(bool[] doors, int montysRevealedDoor, int oldGuess)
     {
 
@@ -140,7 +160,13 @@ class MontyGame
         return newGuess;
     }
 
-    private string ResultPrint(bool[] doors, int newGuess)
+    /// <summary>
+    /// prints the results
+    /// </summary>
+    /// <param name="doors">bool array of doors</param>
+    /// <param name="newGuess">int of player guess 0-2</param>
+    /// <returns></returns>
+    private string PrintResults(bool[] doors, int newGuess)
     {
         string result = "";
         if (doors[newGuess])
@@ -154,22 +180,35 @@ class MontyGame
 
         return ($"you got the {result}");
     }
-    private bool Result(bool[] doors, int newGuess)
+
+    /// <summary>
+    /// Returns the results
+    /// </summary>
+    /// <param name="doors">bool array of doors</param>
+    /// <param name="newGuess">int of player guess 0-2</param>
+    /// <returns></returns>
+    private bool ReturnResults(bool[] doors, int newGuess)
     {
         return doors[newGuess];
     }
 
+    /// <summary>
+    /// Runs a playable version of the monty hall problem
+    /// </summary>
     public void Play()
     {
-        var doors = StartRandomDoorPositions();
+        var doors = RandomizeDoors();
         var oldGuess = PlayerGuess();
         var montyDoors = MontyRevealedDoor(doors, oldGuess);
         var newGuess = SwitchRequest(doors, montyDoors, oldGuess);
-        var result = ResultPrint(doors, newGuess);
+        var result = PrintResults(doors, newGuess);
         Console.WriteLine(result);
         Console.Read();
     }
 
+    /// <summary>
+    /// Runs a simulated version of monty hall problem
+    /// </summary>
     public void Simulate()
     {
         float switchWinCount = 0;
@@ -235,6 +274,9 @@ class MontyGame
         }
 }
 
+    /// <summary>
+    /// promts user to choose which mode to run
+    /// </summary>
     public void ChooseMode()
     {
         string playerModeResponse;
