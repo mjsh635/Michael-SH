@@ -182,7 +182,28 @@ class MontyGame
     /// <param name="montysRevealedDoor">door revealed by monty to be false</param>
     /// <param name="oldGuess">int of player guess 0-2</param>
     /// <returns> returns the switched guess</returns>
+    private int AlwaysSwitch(bool[] doors, int montysRevealedDoor, int oldGuess)
+    {
+        int newGuess = 0;
+
         // iterate over the doors, if it is a revealed door or original guess continue
+        for (int i = 0; i < doors.Length; i++)
+        {
+            if (i == montysRevealedDoor)
+            {
+                continue;
+            }
+            else if (i == oldGuess)
+            {
+                continue;
+            }
+            else
+            {
+                newGuess = i;
+            }
+        }
+        return newGuess;
+    }
 
     /// <summary>
     /// return a string with the results
@@ -281,25 +302,6 @@ class MontyGame
             {
                 noSwitchWinCount++;
             }
-
-            noSwitchWinPercentage = ((noSwitchWinCount / cycles) * 100);
-
-            for (int i = 0; i < doorsSwitch.Length; i++)
-            {
-                if (i == revealedDoor)
-                {
-                    continue;
-                }
-                else if (i == guessSwitch)
-                {
-                    continue;
-                }
-                else
-                {
-                    newGuess = i;
-                }
-            }
-
             
             // Always switch doors
             newGuess = AlwaysSwitch(doorsSwitch, revealedDoor, guessSwitch);
