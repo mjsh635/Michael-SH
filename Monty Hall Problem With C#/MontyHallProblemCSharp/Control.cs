@@ -213,66 +213,74 @@ class MontyGame
     {
         float switchWinCount = 0;
         float noSwitchWinCount = 0;
-        string requestedCyclesIntput = "";
-        int requestedCycles = 1000;
+        string requestedCyclesIntput;
+        int requestedCycles;
+
+        Console.WriteLine("How many simulations?");
+        while (true)
+        {
+
+            requestedCyclesIntput = Console.ReadLine();
+
+            if (int.TryParse(requestedCyclesIntput, out requestedCycles))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine($"{requestedCyclesIntput} isn't a positive number");
+            }
+        }
+
+
 
         for (int cycles = 1; cycles < requestedCycles + 1; cycles++)
-        Console.WriteLine("How many simulations?");
         {
-            var doorsNoSwitch = StartRandomDoorPositions();
-            var guessNoSwitch = random.Next(0,3);
+            var doorsNoSwitch = RandomizeDoors();
+            var guessNoSwitch = random.Next(0, 3);
             float noSwitchWinPercentage;
+            var doorsSwitch = RandomizeDoors();
+            var guessSwitch = random.Next(0, 3);
+            var revealedDoor = MontyRevealedDoor(doorsSwitch, guessSwitch);
+            int newGuess = 0;
+            float switchWinPercentage;
 
-            if (Result(doorsNoSwitch,guessNoSwitch))
+            if (ReturnResults(doorsNoSwitch, guessNoSwitch))
             {
                 noSwitchWinCount++;
             }
 
             noSwitchWinPercentage = ((noSwitchWinCount / cycles) * 100);
 
-            if (cycles % (requestedCycles/10) == 0)
+            for (int i = 0; i < doorsSwitch.Length; i++)
             {
-                Console.WriteLine($"{requestedCyclesIntput} isn't a positive number");
-            }
-
-            var doorsSwitch = StartRandomDoorPositions();
-            var guessSwitch = random.Next(0, 3);
-            var revealedDoor = MontyRevealedDoor(doorsSwitch, guessSwitch);
-            int newGuess = 0;
-            float switchWinPercentage;
-
-            if (true)
-            {
-                for (int i = 0; i < doorsSwitch.Length; i++)
+                if (i == revealedDoor)
                 {
-                    if (i == revealedDoor)
-                    {
-                        continue;
-                    }
-                    else if (i == guessSwitch)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        newGuess = i;
-                    }
+                    continue;
+                }
+                else if (i == guessSwitch)
+                {
+                    continue;
+                }
+                else
+                {
+                    newGuess = i;
                 }
             }
 
-            if (Result(doorsSwitch,newGuess))
+            if (ReturnResults(doorsSwitch, newGuess))
             {
                 switchWinCount++;
             }
-            switchWinPercentage = ((switchWinCount/cycles)*100);
+            switchWinPercentage = ((switchWinCount / cycles) * 100);
             if (cycles % (requestedCycles / 10) == 0)
             {
                 Console.WriteLine($"After {cycles} cycles, by always staying you win: {noSwitchWinPercentage} percent of the time");
                 Console.WriteLine($"After {cycles} cycles, by always switching you win: {switchWinPercentage} percent of the time \n");
             }
-            
+
         }
-}
+    }
 
     /// <summary>
     /// promts user to choose which mode to run
